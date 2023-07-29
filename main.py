@@ -6,7 +6,7 @@ import requests
 db = SQLAlchemy()
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///movie-list.db"
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = 'SECRET_KEY'
 Bootstrap5(app)
 db.init_app(app)
 
