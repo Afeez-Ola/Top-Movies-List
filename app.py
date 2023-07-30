@@ -79,11 +79,11 @@ def edit(movie_id):
     movie = MovieList.query.get_or_404(movie_id)
 
     if request.method == "POST":
-        ranking = request.form.get('ranking')
+        rating = request.form.get('rating')
         review = request.form.get('review')
 
-        if ranking is not None:
-            movie.ranking = float(ranking)
+        if rating is not None:
+            movie.ranking = float(rating)
         movie.review = review
         db.session.commit()
         return redirect(url_for('home'))
@@ -101,4 +101,4 @@ def delete(movie_id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True,host="0.0.0.0", port=3000)
+    app.run(debug=True)
