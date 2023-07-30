@@ -83,7 +83,7 @@ def edit(movie_id):
         review = request.form.get('review')
 
         if rating is not None:
-            movie.ranking = float(rating)
+            movie.rating = float(rating)
         movie.review = review
         db.session.commit()
         return redirect(url_for('home'))
