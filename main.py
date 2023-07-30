@@ -2,11 +2,15 @@ from flask import Flask, render_template, redirect, url_for, request
 from flask_bootstrap import Bootstrap5
 from flask_sqlalchemy import SQLAlchemy
 import requests
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 db = SQLAlchemy()
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///movie-list.db"
-app.config['SECRET_KEY'] = 'SECRET_KEY'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 Bootstrap5(app)
 db.init_app(app)
 
@@ -41,7 +45,7 @@ def add():
         url = f"https://api.themoviedb.org/3/search/movie?query={movie_name}"
         headers = {
             "accept": "application/json",
-            'Authorization': "Bearer API_KEY"
+            'Authorization': "Bearer {os.getenv('API_KEY')}"
         }
         response = requests.get(url, headers=headers)
         movie_data = response.json()["results"][0]
