@@ -45,12 +45,16 @@ def add():
         url = f"https://api.themoviedb.org/3/search/movie?query={movie_name}"
         headers = {
             "accept": "application/json",
-            'Authorization': "Bearer {os.getenv('API_KEY')}"
+            'Authorization': "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZjY3NWQ1M2JhMzg5MjhjZDVjOWZhMjQzY2FjMDUxNiIsInN1YiI6IjY0YzU3Mzc4NDFhYWM0MGZiM2U0ZjgxOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.VMk7e9EWWZ0202Gu7W9u-gssJ1XG5iWRF8CAy49m3t8"
         }
         response = requests.get(url, headers=headers)
         movie_data = response.json()["results"][0]
 
         movie_id = movie_data["id"]
+        if movie_data:
+            print(movie_data)
+        else:
+            return "No movie data found for the given name."
         existing_movie = MovieList.query.filter_by(title=movie_data["original_title"]).first()
 
         if existing_movie:
